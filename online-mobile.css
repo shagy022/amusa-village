@@ -1,5 +1,9 @@
 #bobTodoButton{display:none!important}
 #mobileControls,#mobileLandscapeHint{display:none}
+#hint{bottom:12px;max-width:75vw;white-space:normal;text-align:center;padding:7px 12px}
+#speech{top:auto;bottom:54px;justify-content:flex-end;max-height:min(230px,38vh)}
+body[data-room="store"] #speech{top:auto;bottom:54px}
+#instructions{top:auto;bottom:18px;transform:translateX(-50%);max-height:calc(100dvh - 85px);overflow:auto}
 .onlineMenuOpen #healthHUD,.onlineMenuOpen #fpsHUD,.onlineMenuOpen #currentBattleParty,.onlineMenuOpen #weatherButton,.onlineMenuOpen #hint,.onlineMenuOpen #travelLights,.onlineMenuOpen #ghostJournal,.onlineMenuOpen #speech{display:none!important}
 @media(pointer:coarse),(max-width:900px){
  html,body,#game{touch-action:none;overscroll-behavior:none}
@@ -16,12 +20,13 @@
  #mobileControls .mobileRun{position:absolute;top:auto;right:auto;left:154px;bottom:max(16px,env(safe-area-inset-bottom));width:64px;height:42px}
  .mobileActions{position:absolute;right:max(12px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));display:flex;gap:7px}
  .mobileActions button{min-width:60px;padding:8px}
- #weatherButton{left:153px;bottom:68px;max-width:210px;font-size:10px;padding:5px}
+ #weatherButton{left:12px;top:118px;bottom:auto;max-width:180px;font-size:10px;padding:5px}
  #currentBattleParty{bottom:152px;max-width:160px;max-height:145px;overflow:auto;font-size:10px}
  body>header{top:8px;left:8px}body>header h1{font-size:18px}body>header p{max-width:200px;font-size:10px}
  body>nav{top:8px;right:8px;gap:4px}body>nav button{min-width:36px;min-height:36px;padding:5px;font-size:11px}
- #hint{bottom:155px;max-width:65vw;font-size:11px}
- #speech{max-width:360px;max-height:130px;overflow:hidden;font-size:11px;bottom:155px}
+ #hint{bottom:6px;width:min(420px,calc(100vw - 460px));max-width:none;font-size:10px;line-height:1.2;padding:5px 8px}
+ #speech,body[data-room="store"] #speech{left:50%;right:auto;top:auto;transform:translateX(-50%);bottom:42px;width:min(420px,calc(100vw - 460px));max-width:none;max-height:120px;overflow:hidden;font-size:11px}
+ #speech .speech-card{padding:6px 9px}
  #speech p{font-size:11px;line-height:1.25;margin:3px 0}
  #battlePanel.goblinKingBattle .battleStage{min-width:0}
  #battlePanel.goblinKingBattle{--king-unit:clamp(70px,calc((100vh - 190px)/3),100px)}
@@ -33,3 +38,4 @@
  #etnaCinemaChoices button{min-height:44px}#etnaCinemaText{font-size:clamp(14px,2.4vw,22px)}
 }
 @media(max-width:600px) and (orientation:portrait){#mobileLandscapeHint{display:block;position:fixed;top:80px;left:10px;right:10px;z-index:1800;text-align:center;background:#1b302cdb;color:#f2dfb4;padding:6px;border-radius:5px;font:12px system-ui}body>header p{display:none}body>nav{top:36px;left:8px;right:8px;justify-content:space-between}#healthHUD{top:112px}#fpsHUD{top:96px}.phoneLayout{grid-template-columns:100px minmax(0,1fr)}#weatherButton{max-width:150px;bottom:126px}.mobileActions{gap:3px}.mobileActions button{min-width:48px;font-size:12px!important}.mobileRun{bottom:64px!important}.onlineMenuOpen #mobileLandscapeHint{display:none}}
+@media(max-width:600px) and (orientation:portrait){#speech,body[data-room="store"] #speech{bottom:155px;width:calc(100vw - 28px)}#hint{bottom:130px;width:calc(100vw - 28px)}#weatherButton{top:auto;left:153px}#instructions{bottom:150px;max-height:65dvh}}
