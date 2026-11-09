@@ -1,0 +1,20 @@
+/* The King's rendered box is exactly three ordinary fighters tall and wide. */
+#battlePanel.goblinKingBattle{--king-unit:clamp(90px,calc((100vh - 400px)/3),128px);overflow:auto}
+#battlePanel.goblinKingBattle .battleStage{height:calc(var(--king-unit)*3 + 60px);min-height:calc(var(--king-unit)*3 + 60px);max-height:none;aspect-ratio:auto;width:min(1150px,100%);flex-shrink:0}
+#battlePanel.goblinKingBattle .battleFighter{width:var(--king-unit);--fighter-half:calc(var(--king-unit)/2)}
+#battlePanel.goblinKingBattle .battleFighter span{width:var(--king-unit);height:var(--king-unit)}
+#battlePanel.goblinKingBattle .goblinKingFighter{width:calc(var(--king-unit)*3);--fighter-half:calc(var(--king-unit)*1.5)}
+#battlePanel.goblinKingBattle .goblinKingFighter span{width:calc(var(--king-unit)*3);height:calc(var(--king-unit)*3)}
+
+.kingKnockedAway{visibility:hidden!important;pointer-events:none}
+#etnaCinema[data-kind="goblin-king"] #etnaCinemaText{color:#ffe3b1}
+#etnaCinema[data-kind="goblin-escape"] #etnaCinemaText{color:#eef9df}
+@media(max-width:700px){#battlePanel.goblinKingBattle .battleStage{min-width:620px}}
+
+#battlePanel.goblinKingBattle .mineEffect{font-size:9px;line-height:1.1;margin:2px 0;display:block}
+#battlePanel.goblinKingBattle .battleVitals .battleHealthRow{margin-top:3px}
+#battlePanel.goblinKingBattle .battleVitals .battleHealthRow strong{font-size:10px;line-height:1.1}
+#battlePanel.goblinKingBattle .battleVitals .battleHealthRow label{font-size:9px;line-height:1.1}
+
+#etnaCinema[data-kind="goblin-escape"] #etnaCinemaText{cursor:pointer}
+#etnaCinema[data-kind="goblin-escape"] #etnaCinemaChoices button{min-width:150px}

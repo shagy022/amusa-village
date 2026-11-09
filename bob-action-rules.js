@@ -1,0 +1,13 @@
+(function(root){'use strict';
+const actions=['move','buy','fish','invite','give_item','pay','treasury_payment','bank','sell','home','social','employment','taxes','unlock','refreshment'];
+function validate(action,p={}){if(!actions.includes(action))throw Error('Bob does not have that game ability yet.');if(typeof p!=='object'||Array.isArray(p)||!p)throw Error('Action parameters must be an object.');if(['buy','fish','give_item'].includes(action)){const n=p.quantity??1;if(!Number.isInteger(n)||n<1||n>20)throw Error('Choose between 1 and 20.')}return {...p}}
+function path(start,target,walkable,step=8){
+ const minX=72,minY=96,cols=Math.max(150,Math.ceil((Math.max(start.x,target.x)-72+64)/step)),rows=Math.max(106,Math.ceil((Math.max(start.y,target.y)-96+64)/step)),cache=new Uint8Array(cols*rows),cell=p=>({x:Math.round((p.x-minX)/step),y:Math.round((p.y-minY)/step)}),key=p=>p.y*cols+p.x;
+ const valid=p=>{if(p.x<0||p.x>=cols||p.y<0||p.y>=rows)return false;const k=key(p);if(!cache[k])cache[k]=walkable(minX+p.x*step,minY+p.y*step)?1:2;return cache[k]===1},nearest=p=>{if(valid(p))return p;let found=null;for(let y=-4;y<=4;y++)for(let x=-4;x<=4;x++){const n={x:p.x+x,y:p.y+y};if(valid(n)&&(!found||x*x+y*y<found.d))found={...n,d:x*x+y*y}}return found};
+ const s=nearest(cell(start)),goal=nearest(cell(target));if(!s||!goal)return null;
+ const heap=[],better=(a,b)=>a.f<b.f||a.f===b.f&&a.h<b.h,push=n=>{let i=heap.length;heap.push(n);while(i){const p=(i-1)>>1;if(!better(heap[i],heap[p]))break;[heap[i],heap[p]]=[heap[p],heap[i]];i=p}},pop=()=>{const n=heap[0],last=heap.pop();if(heap.length){heap[0]=last;let i=0;for(;;){let j=i,left=i*2+1,right=left+1;if(left<heap.length&&better(heap[left],heap[j]))j=left;if(right<heap.length&&better(heap[right],heap[j]))j=right;if(j===i)break;[heap[i],heap[j]]=[heap[j],heap[i]];i=j}}return n},heuristic=p=>Math.abs(p.x-goal.x)+Math.abs(p.y-goal.y),cost=new Map([[key(s),0]]),prev=new Map([[key(s),null]]);
+ push({...s,g:0,h:heuristic(s),f:heuristic(s)});let end=null;while(heap.length){const p=pop();if(p.g!==cost.get(key(p)))continue;if(key(p)===key(goal)){end=p;break}for(const [dx,dy]of [[1,0],[-1,0],[0,1],[0,-1]]){const n={x:p.x+dx,y:p.y+dy},g=p.g+1,k=key(n);if(!valid(n)||g>=(cost.get(k)??Infinity))continue;cost.set(k,g);prev.set(k,p);const h=heuristic(n);push({...n,g,h,f:g+h})}}
+ if(!end)return null;const out=[];for(let p=end;p;p=prev.get(key(p)))out.push({x:minX+p.x*step,y:minY+p.y*step});return out.reverse();
+}
+root.AmusaBobActionRules={actions,validate,path};if(typeof module!=='undefined')module.exports=root.AmusaBobActionRules;
+})(typeof window==='undefined'?globalThis:window);

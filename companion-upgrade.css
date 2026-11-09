@@ -1,0 +1,5 @@
+#residentTalkNearby,#bigfootNearby,#bobTalkNearby{display:none!important;pointer-events:none!important}
+#battleItemPicker{position:absolute;z-index:20;inset:12% 12% auto;max-height:70vh;overflow:auto;border:2px solid #aebcdb;background:linear-gradient(125deg,#243870,#111e42);box-shadow:0 12px 40px #0009;padding:20px;border-radius:9px}#battleItemPicker[hidden]{display:none}#battleItemPicker article{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px;border-bottom:1px solid #8192bb}#battleItemPicker article>span{font-size:13px;color:#c3d5dd}#battleItemPicker select{margin-left:8px}#battleItemPicker h3{margin:0 0 12px}#battlePanel #battleInventory{border-color:#d4be80}
+@media(max-width:700px){#battleItemPicker{inset:8% 3% auto}#battleItemPicker article{grid-template-columns:1fr}}
+
+#talkKeeper{display:none!important}

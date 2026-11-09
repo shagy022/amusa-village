@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.sqlite*
+*.db
+.env
+.env.*
+node_modules/
+save*.json
+*-save.json
+Amusa-Bob-Data/

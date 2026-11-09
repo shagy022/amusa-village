@@ -1,0 +1,7 @@
+(function(root){'use strict';
+function unlocked(a){if(a.id==='excalibur')return [{id:'fireball',name:'Fireball',effect:'fire',level:1,damage:1,delivery:'ranged'},...(Number(a.people?.skills?.magic)>=35?[{id:'fireball-2',name:'Fireball II',effect:'fire',level:2,damage:1,delivery:'ranged'}]:[])];if(a.id==='lorraina')return [{id:'healing-light',name:'Healing Light',effect:'heal',percent:.126,variance:1,damage:1,target:'ally',delivery:'magic'},{id:'healing-grove',name:'Healing Grove',effect:'heal',percent:.09,variance:1,damage:1,target:'party',delivery:'magic'}];return []}
+function choose(a,id){const list=unlocked(a);return id?list.find(s=>s.id===id)||null:a.id==='excalibur'?list.at(-1)||null:list[0]||null}
+function amount(maxHp,percent,variance,rng=Math.random){return Math.max(1,Math.round(maxHp*percent)+Math.floor(rng()*(variance*2+1))-variance)}
+function fire(a,b,spell,armor=0,rng=Math.random){const percent=b.people?.monster==='miner-spirit'?.15:.25,base=amount(b.people.maxHp,percent,2,rng),blocked=Math.min(base,Math.max(0,armor));return {move:spell.name,spell:spell.id,spellLevel:spell.level,damage:base-blocked,base,bonus:0,blocked,kind:'magic',delivery:'ranged',percent,burn:spell.level>=2?{percent:.10,variance:1,turns:2}:null}}
+root.AmusaSpellRules={unlocked,choose,amount,fire};if(typeof module!=='undefined')module.exports=root.AmusaSpellRules;
+})(typeof window==='undefined'?globalThis:window);
